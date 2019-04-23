@@ -1,0 +1,39 @@
+This problem was recently asked by Google.
+Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+Bonus: Can you do this in one pass?
+
+Solution: 
+          function checkPair(array, k) {
+              // sort the array 
+              array.sort((a, b) => a - b); // [ 3, 7, 10, 15 ]
+
+              let i = 0,
+                  j = array.length - 1;
+              let pairExist = false;
+
+              // compare the sum with k 
+              while (i < j) {
+                  let sum = array[i] + array[j];
+                  if (sum === k) {
+                      pairExist = true;
+                      break;
+                      // uncomment the below commented lines of code if 
+                      // you want to display pair values as well and 
+                      // comment the "break" statement above. 
+                      // console.log(array[i], ",", array[j]);  // 7 , 10 
+                      // i++;
+                      // j++;
+                  } else if (sum > k) {
+                      j--;
+                  } else if (sum < k) {
+                      i++;
+                  }
+              }
+
+              return pairExist;
+          }
+
+          const array = [10, 15, 3, 7];
+          const k = 17;
+          console.log(checkPair(array, k)); // true
