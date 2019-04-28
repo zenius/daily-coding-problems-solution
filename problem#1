@@ -5,16 +5,16 @@ Bonus: Can you do this in one pass?
 
 Solution: 
           function checkPair(array, k) {
-              // sort the array 
-              array.sort((a, b) => a - b); // [ 3, 7, 10, 15 ]
+              // sort the array without mutation
+             let _array = [...array].sort((a, b) => a - b); // [ 3, 7, 10, 15 ]
 
               let i = 0,
-                  j = array.length - 1;
+                  j = _array.length - 1;
               let pairExist = false;
 
               // compare the sum with k 
               while (i < j) {
-                  let sum = array[i] + array[j];
+                  let sum = _array[i] + _array[j];
                   if (sum === k) {
                       pairExist = true;
                       break;
