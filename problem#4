@@ -10,16 +10,17 @@ You can modify the input array in-place.
 
 Solution: 
         function FindLowestMissingPositive(array) {
-         // sort the array 
-         array.sort((a, b) => a - b);
+         // sort the array without mutation 
+         let _array = [...array].sort((a, b) => a - b);
 
-         let nextNumber = 1;
-         for (let index = 0; index < array.length; index++) {
-             if (array[index] > 0) {
-                 if (array[index] > nextNumber) {
+         let nextNumber = 1, 
+             arrayLength = _array.length; 
+         for (let index = 0; index < arrayLength; index++) {
+             if (_array[index] > 0) {
+                 if (_array[index] > nextNumber) {
                      break;
                  } else {
-                     nextNumber = array[index] + 1;
+                     nextNumber = _array[index] + 1;
                  }
              }
          }
