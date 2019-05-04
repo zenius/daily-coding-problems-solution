@@ -1,0 +1,42 @@
+This problem was asked by Airbnb.
+
+Given a list of integers, write a function that returns the largest sum of non-adjacent numbers. 
+Numbers can be 0 or negative.
+
+For example, [2, 4, 6, 2, 5] should return 13, since we pick 2, 6, and 5.
+[5, 1, 1, 5] should return 10, since we pick 5 and 5.
+
+Follow-up: Can you do this in O(N) time and constant space?
+
+Solution:
+          function comparator(a, b) {
+            return a - b;
+          }
+
+          function largest(...args) {
+            const array = [...args].sort(comparator);
+            return array[array.length - 1];
+          }
+
+
+          function largestNonAdjacentSum(array) {
+            const arrayLength = array.length;
+            let inclusiveSum = array[0];
+            let exclusiveSum = 0;
+            let previousInclusiveSum = 0;
+
+            for (let index = 1; index < arrayLength; index++) {
+              previousInclusiveSum = inclusiveSum;
+              inclusiveSum = exclusiveSum + array[index];
+              exclusiveSum = largest(previousInclusiveSum, exclusiveSum);
+            }
+
+            return largest(inclusiveSum, exclusiveSum);
+          };
+
+          console.log(largestNonAdjacentSum([5, 5, 10, 40, 50, 35])); // 80
+          console.log(largestNonAdjacentSum([2, 3, 7, 10])); // 13 
+          console.log(largestNonAdjacentSum([5, 100, 10, 110, 120, 15])); // 225
+          console.log(largestNonAdjacentSum([10, 20, 30, 25])); // 45
+          console.log(largestNonAdjacentSum([])); // undefined
+          
