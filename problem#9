@@ -9,15 +9,10 @@ For example, [2, 4, 6, 2, 5] should return 13, since we pick 2, 6, and 5.
 Follow-up: Can you do this in O(N) time and constant space?
 
 Solution:
-          function comparator(a, b) {
-            return a - b;
+          function largest(firstNumber, secondNumber) {
+            return firstNumber > secondNumber ? firstNumber : secondNumber;
+            // return Math.max(firstNumber, secondNumber); 
           }
-
-          function largest(...args) {
-            const array = [...args].sort(comparator);
-            return array[array.length - 1];
-          }
-
 
           function largestNonAdjacentSum(array) {
             const arrayLength = array.length;
@@ -38,5 +33,3 @@ Solution:
           console.log(largestNonAdjacentSum([2, 3, 7, 10])); // 13 
           console.log(largestNonAdjacentSum([5, 100, 10, 110, 120, 15])); // 225
           console.log(largestNonAdjacentSum([10, 20, 30, 25])); // 45
-          console.log(largestNonAdjacentSum([])); // undefined
-          
