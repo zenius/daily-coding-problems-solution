@@ -6,42 +6,40 @@ For example, the message '111' would give 3, since it could be decoded as 'aaa',
 You can assume that the messages are decodable. For example, '001' is not allowed.
 
 Solution: 
-        function noOfWaysToEncode(encodedMessage) { 
-        let encodedMessageLength = encodedMessage.length;
+        function noOfWaysToEncode(encodedMessage) {
+            let encodedMessageLength = encodedMessage.length;
 
-        switch(encodedMessageLength) { 
-          case 1: 
-            return canDecode(encodedMessage); 
-          case 2: 
-            if(encodedMessage[0] === "0") {
-              return canDecode(encodedMessage); 
+            switch (encodedMessageLength) {
+                case 1:
+                    return canDecode(encodedMessage);
+                case 2:
+                    if (encodedMessage[0] === "0") {
+                        return canDecode(encodedMessage);
+                    }
+                    return canDecode(encodedMessage) + 1;
+
+                default:
+                    return canDecode(encodedMessage.slice(0, 1)) * noOfWaysToEncode(encodedMessage.slice(1)) +
+                        canDecode(encodedMessage.slice(0, 2)) * noOfWaysToEncode(encodedMessage.slice(2));
+
             }
-            return canDecode(encodedMessage) + 1; 
-
-          default: 
-            return canDecode(encodedMessage.slice(0,1)) * noOfWaysToEncode(encodedMessage.slice(1)) + 
-                 canDecode(encodedMessage.slice(0,2)) * noOfWaysToEncode(encodedMessage.slice(2)); 
-
-        }
-      }
-
-      function canDecode(encodedMessage) {
-        if(encodedMessage[0] === "0") { 
-          return 0; 
         }
 
-        let mappedNumber = parseInt(encodedMessage, 10);  
-        if(mappedNumber >= 1 && mappedNumber <= 26) {
-          return 1;  
+        function canDecode(encodedMessage) {
+            if (encodedMessage[0] === "0") {
+                return 0;
+            }
+
+            let mappedNumber = parseInt(encodedMessage, 10);
+            if (mappedNumber >= 1 && mappedNumber <= 26) {
+                return 1;
+            }
+            return 0;
         }
-        return 0; 
-      }
 
-      console.log(noOfWaysToEncode("1")); 	// 1
-      console.log(noOfWaysToEncode("12")); 	// 2
-      console.log(noOfWaysToEncode("123")); 	// 3
-      console.log(noOfWaysToEncode("27435")); // 1
-      console.log(noOfWaysToEncode("01")); 	// 0
-      console.log(noOfWaysToEncode("101")); 	// 1
-
-      
+        console.log(noOfWaysToEncode("1")); // 1
+        console.log(noOfWaysToEncode("12")); // 2
+        console.log(noOfWaysToEncode("123")); // 3
+        console.log(noOfWaysToEncode("27435")); // 1
+        console.log(noOfWaysToEncode("01")); // 0
+        console.log(noOfWaysToEncode("101")); // 1
