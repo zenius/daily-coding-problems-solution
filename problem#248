@@ -2,7 +2,7 @@ This problem was asked by Nvidia.
 
 Find the maximum of two numbers without using any if-else statements, branching, or direct comparisons.
 
-Solution: 
+Solution:  
         function maxOfTwoNumbers(a, b) { 
             return (a + b +  Math.abs(a-b))/2;  
         }
