@@ -1,0 +1,13 @@
+This problem was asked by Nvidia.
+
+Find the maximum of two numbers without using any if-else statements, branching, or direct comparisons.
+
+Solution: 
+        function maxOfTwoNumbers(a, b) { 
+            return (a + b +  Math.abs(a-b))/2;  
+        }
+
+        console.log(maxOfTwoNumbers(5, 3)); // 5
+        console.log(maxOfTwoNumbers(3, 15)); // 15
+        console.log(maxOfTwoNumbers(0, -1)); // 0
+
