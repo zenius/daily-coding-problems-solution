@@ -39,8 +39,6 @@ function isOdd(value) {
 }
 
 function canBeSplitIntoTwo(array) {
-	// console.time('total');
-
 	let isPossible = false;
 
 	const sortedArray = sortArray(array);
@@ -56,16 +54,11 @@ function canBeSplitIntoTwo(array) {
 
 	const meanValue = arraySum / 2;
 
-	// console.log(sortedArray);
-	// console.log(meanValue);
-
 	let temp = meanValue;
 	let foundIndex = -1;
 	for(let i = 0 ; i < sortedArrayLength - 1; i++) { 
 		// search for meanValue or meanValue - sortedArray[i] 
 		foundIndex = binarySearch(sortedArray, temp);
-
-		// console.log(foundIndex)
 	
 		if(foundIndex === - 1) { 
 			temp = temp - sortedArray[i]; 
@@ -74,8 +67,6 @@ function canBeSplitIntoTwo(array) {
 			break; 
 		}
 	}
-
-	// console.timeEnd('total');
 
 	return isPossible;
 }
