@@ -1,0 +1,90 @@
+// This problem was asked by Facebook.
+
+// Given a multiset of integers, return whether it can be partitioned into two subsets whose sums are the same.
+
+// For example, given the multiset {15, 5, 20, 10, 35, 15, 10}, it would return true, since we can split it up into {15, 5, 10, 15, 10} and {20, 35}, which both add up to 55.
+
+// Given the multiset {15, 5, 20, 10, 35}, it would return false, since we can't split it up into two subsets that add up to the same sum.
+
+function comparison(a, b) {
+	return a - b;
+}
+
+function sortArray(array) {
+	return [...array].sort(comparison);
+}
+
+function reducer(accumulator, currentValue){ 
+	return accumulator + currentValue;
+}
+
+function binarySearch(array, targetValue) {
+	let min = 0;
+	let max = array.length - 1;
+	let guess = Math.floor((min+max)/2);
+
+	while(1) {
+		if(max < min) { return -1; } // target not found  
+		
+		if(array[guess] === targetValue) { return guess; } // target found 
+		else if(array[guess] < targetValue) { min =  guess + 1;}
+		else { max = guess - 1; }
+
+		guess = Math.floor((max+min)/2);
+	}
+};
+
+function isOdd(value) { 
+	return value % 2 !== 0;
+}
+
+function canBeSplitIntoTwo(array) {
+	// console.time('total');
+
+	let isPossible = false;
+
+	const sortedArray = sortArray(array);
+	const sortedArrayLength = sortedArray.length;
+
+	const arraySum = array.reduce(reducer,0);
+
+	// it is sure that the array cannot be divided into two subset
+	// if the array sum is odd
+	if(isOdd(arraySum)) { 
+		return false; 
+	} 
+
+	const meanValue = arraySum / 2;
+
+	// console.log(sortedArray);
+	// console.log(meanValue);
+
+	let temp = meanValue;
+	let foundIndex = -1;
+	for(let i = 0 ; i < sortedArrayLength - 1; i++) { 
+		// search for meanValue or meanValue - sortedArray[i] 
+		foundIndex = binarySearch(sortedArray, temp);
+
+		// console.log(foundIndex)
+	
+		if(foundIndex === - 1) { 
+			temp = temp - sortedArray[i]; 
+		} else { 
+			isPossible = true; 
+			break; 
+		}
+	}
+
+	// console.timeEnd('total');
+
+	return isPossible;
+}
+
+console.log(canBeSplitIntoTwo([15, 5, 20, 10, 35, 15, 10])); // true
+console.log(canBeSplitIntoTwo([15, 5, 20, 10, 35])); // false
+console.log(canBeSplitIntoTwo([15, 5, 25, 10])); // false
+console.log(canBeSplitIntoTwo([1,5,3])); // false
+console.log(canBeSplitIntoTwo([3, 1, 1, 2, 2, 1])); // true
+console.log(canBeSplitIntoTwo([1, 2, 3, 4, 9, 1])); // true
+console.log(canBeSplitIntoTwo([1, 5, 11, 5])); // true
+console.log(canBeSplitIntoTwo([1, 1, 6, 1, 1, 1, 1])); // true
