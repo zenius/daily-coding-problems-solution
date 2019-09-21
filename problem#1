@@ -18,12 +18,6 @@ Solution:
                   if (sum === k) {
                       pairExist = true;
                       break;
-                      // uncomment the below commented lines of code if 
-                      // you want to display pair values as well and 
-                      // comment the "break" statement above. 
-                      // console.log(array[i], ",", array[j]);  // 7 , 10 
-                      // i++;
-                      // j++;
                   } else if (sum > k) {
                       j--;
                   } else if (sum < k) {
